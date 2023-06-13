@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace WebShop.Areas.Admin.Pages.Role
 {
+    [Authorize(Roles = "Admin")]
     public class AddModel : PageModel
     {
         private readonly RoleManager<IdentityRole> _roleManager;

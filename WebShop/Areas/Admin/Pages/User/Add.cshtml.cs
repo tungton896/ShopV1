@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 using WebShop.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace WebShop.Areas.Admin.Pages.User
 {
+    [Authorize(Roles = "Admin")]
     public class AddModel : PageModel
     {
         private readonly UserManager<WebShopUser> _userManager;
@@ -33,6 +36,7 @@ namespace WebShop.Areas.Admin.Pages.User
             public string Email { set; get; }
 
             [Required(ErrorMessage = "Phải nhập số điện thoại")]
+            [DataType(DataType.PhoneNumber)]
             [Display(Name = "Số điện thoại")]
             public string PhoneNumber { set; get; }
 
@@ -133,6 +137,13 @@ namespace WebShop.Areas.Admin.Pages.User
             }
             else
             {
+                var result = await _userManager.FindByEmailAsync(Input.Email);
+                if (result != null)
+                {
+                    ModelState.Clear();
+                    StatusMessage = "Error: Email người dùng đã tồn tại";
+                    return Page();
+                }
                 // TẠO MỚI
                 var newUser = new WebShopUser
                 {
@@ -140,9 +151,10 @@ namespace WebShop.Areas.Admin.Pages.User
                     FullName= Input.FullName,
                     PhoneNumber= Input.PhoneNumber,
                     UserName= Input.Email,
+                    
                 };
                 // Thực hiện tạo Role mới
-                var rsNewUser = await _userManager.CreateAsync(newUser);
+                var rsNewUser = await _userManager.CreateAsync(newUser, Input.Password);
                 if (rsNewUser.Succeeded)
                 {
                     StatusMessage = $"Đã tạo người dùng mới thành công: {newUser.FullName}";

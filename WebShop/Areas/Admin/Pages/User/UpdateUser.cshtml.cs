@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using WebShop.Areas.Identity.Data;
 
 namespace Album.Areas.Admin.Pages.User
 {
+    [Authorize(Roles = "Admin")]
     public class UpdateUser : PageModel
     {
         private readonly RoleManager<IdentityRole> _roleManager;

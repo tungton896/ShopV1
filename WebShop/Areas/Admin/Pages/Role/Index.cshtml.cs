@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebShop.Areas.Admin.Pages.Role
 {
+    [Authorize(Roles ="Admin")]
     public class IndexModel : PageModel
     {
         private readonly RoleManager<IdentityRole> _roleManager;

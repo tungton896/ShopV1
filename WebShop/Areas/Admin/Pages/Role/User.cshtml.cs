@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 using WebShop.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace WebShop.Areas.Admin.Pages.Role
 {
+    [Authorize(Roles = "Admin")]
     public class UserModel : PageModel
     {
         const int USER_PER_PAGE = 10;
