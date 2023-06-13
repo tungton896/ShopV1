@@ -1,0 +1,62 @@
+﻿@page "/admin/User/"
+@model WebShop.Areas.Admin.Pages.User.UserModel
+@{
+    ViewData["Title"] = "DANH SÁCH NGƯỜI DÙNG";
+}
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="@Model.StatusMessage" />
+<form method="POST" class="my-1 d-inline">
+    <button class="btn btn-secondary" asp-page="./Add"
+            asp-page-handler="StartNewUser">
+        Thêm mới người dùng
+    </button>
+</form>
+<table class="table table-striped">
+    <tr>
+        <th>UserName</th>
+        <th>Roles</th>
+        <th>FullName</th>
+        <th>Email</th>
+        <th>PhoneNumber</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var user in @Model.users)
+    {
+        <tr>
+            <td>@user.UserName</td>
+            <td>@user.listroles</td>
+            <td>@user.FullName</td>
+            <td>@user.Email</td>
+            <td>@user.PhoneNumber</td>
+            <td>
+                <form method="POST" class="d-inline">
+                    <button name="Input.ID" value="@user.Id" class="btn btn-primary btn-sm"
+                        asp-page="./UpdateUser">
+                        Chỉnh sửa
+                    </button>
+                </form>
+            </td>
+        </tr>
+
+    }
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+@{
+
+    Func<int?, string> generateUrl = (int? _pagenumber) =>
+    {
+        return Url.Page("./User", new { pageNumber = _pagenumber });
+    };
+
+    var datapaging = new
+    {
+        currentPage = Model.pageNumber,
+        countPages = Model.totalPages,
+        generateUrl = generateUrl
+    };
+
+}
+<partial name="_Paging" model="@datapaging" />

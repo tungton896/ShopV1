@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebShop.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebShop.Areas.Admin.Pages.Role
+namespace WebShop.Areas.Admin.Pages.User
 {
     public class UserModel : PageModel
     {
@@ -52,6 +52,9 @@ namespace WebShop.Areas.Admin.Pages.Role
                           {
                               Id = u.Id,
                               UserName = u.UserName,
+                              FullName = u.FullName,
+                              Email = u.Email,
+                              PhoneNumber = u.PhoneNumber,
                           });
 
 
