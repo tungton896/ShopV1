@@ -1,12 +1,20 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using WebShop.Areas.Identity.Data
-
+@using System.Security.Claims
 @inject SignInManager<WebShopUser> SignInManager
 @inject UserManager<WebShopUser> UserManager
-
+@{
+    var roles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(x => x.Value);
+}
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+    if (roles.Contains("Admin"))
+    {
+       <li class="nav-item">
+                <a id="manage" class="nav-link text-dark" asp-area="Admin" asp-page="/Index" title="Manage">Admin Mannage</a>
+       </li>
+    }
     <li class="nav-item">
         <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
     </li>

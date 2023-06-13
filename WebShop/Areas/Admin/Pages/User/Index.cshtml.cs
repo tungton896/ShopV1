@@ -43,9 +43,6 @@ namespace WebShop.Areas.Admin.Pages.User
         {
 
             var cuser = await _userManager.GetUserAsync(User);
-            if(cuser != null)
-            await _userManager.AddToRolesAsync(cuser, new string[] { "Editor" });
-
             if (pageNumber == 0)
                 pageNumber = 1;
 

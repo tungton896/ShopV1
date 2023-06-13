@@ -32,28 +32,38 @@
 		<!--(remove-empty-lines-end)-->
 
 		<!-- Theme CSS -->
-	<link rel="stylesheet" href="~/css/theme.css" />
+		<link rel="stylesheet" href="~/css/theme.css" />
 
 
 		<!-- Theme Layout -->
-	<link rel="stylesheet" href="~/css/layouts/modern.css" />
+		<link rel="stylesheet" href="~/css/layouts/modern.css" />
 		<!--(remove-empty-lines-end)-->
 
 
 
 		<!-- Skin CSS -->
-	<link rel="stylesheet" href="~/css/skins/default.css" />
+		<link rel="stylesheet" href="~/css/skins/default.css" />
 
 		<!-- Theme Custom CSS -->
-	<link rel="stylesheet" href="~/css/custom.css">
+		<link rel="stylesheet" href="~/css/custom.css">
 
 		<!-- Head Libs -->
-	<script src="~/vendor/modernizr/modernizr.js"></script>
+		<script src="~/vendor/modernizr/modernizr.js"></script>
 
 	</head>
 	<body>
+		<section class="body">
+			<partial name="PartialView/_headerAdminPartial" />
+			<div class="inner-wrapper">
+				<partial name="PartialView/_sideBarAdminPartial" />
+				<section role="main" class="content-body content-body-modern">
+					<partial name="PartialView/_breadcrumbPartial" />
+					@RenderBody()
+				</section>
+			</div>
+		</section>
+
 		
-		@RenderBody()
 		<!-- Vendor -->
 		<script src="~/vendor/jquery/jquery.js"></script>
 		<script src="~/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
@@ -87,6 +97,6 @@
 	<script src="~/js/examples/examples.header.menu.js"></script>
 	<script src="~/js/examples/examples.ecommerce.dashboard.js"></script>
 	<script src="~/js/examples/examples.ecommerce.datatables.list.js"></script>
-
+	@await RenderSectionAsync("Scripts", required: false)
 	</body>
 </html>

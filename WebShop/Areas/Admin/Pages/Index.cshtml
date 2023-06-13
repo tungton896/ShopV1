@@ -2,15 +2,7 @@
 @model WebShop.Areas.Admin.Pages.IndexModel
 @{
 }
-<section class="body">
-	<partial name="PartialView/_headerAdminPartial" />
-	<div class="inner-wrapper">
-		<partial name="PartialView/_sideBarAdminPartial" />
-		<section role="main" class="content-body content-body-modern">
-			<partial name="PartialView/_breadcrumbPartial" />
-			<!-- start: page -->
-			<partial name="PartialView/_recentOrdersPartial" />
-			<!-- end: page -->
-		</section>
-	</div>
-</section>
+
+<!-- start: page -->
+<partial name="PartialView/_recentOrdersPartial" />
+<!-- end: page -->
